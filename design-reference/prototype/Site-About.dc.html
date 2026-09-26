@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>About</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+.status{position:relative;display:inline-block;height:20px;width:170px;vertical-align:middle}
+.status .w{position:absolute;left:0;top:0;opacity:0;white-space:nowrap;animation:cycle 8s infinite}
+.status .w1{animation-delay:0s}.status .w2{animation-delay:2s}.status .w3{animation-delay:4s}.status .w4{animation-delay:6s}
+.status .w::after{content:attr(data-text);position:absolute;left:0;top:0;color:transparent;background:linear-gradient(90deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:shimmer 1.8s linear infinite}
+.star{display:inline-block;animation:spin 3s linear infinite}
+@keyframes cycle{0%{opacity:0;transform:translateY(4px)}4%,21%{opacity:1;transform:none}25%,100%{opacity:0;transform:translateY(-4px)}}
+@keyframes shimmer{from{background-position:150% 0}to{background-position:-100% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.status .w{animation:none}.status .w1{opacity:1}.status .w::after{animation:none;background:none}.star{animation:none}}
+a{text-underline-offset:4px} a:hover{color:#FFFFFF !important}
+body{margin:0;background:#282C34}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1320px; box-sizing: border-box; background: #282C34; color: #D7DAE0; font-family: 'Geist', 'Helvetica Neue', sans-serif; padding: 56px 0 56px 260px;">
+<div style="width: 820px; min-height: 100%; display: flex; flex-direction: column; gap: 64px;">
+<header style="display: flex; justify-content: space-between; align-items: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px;"><nav aria-label="Main" style="display: flex; gap: 24px;"><a href="Site-Home.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.home}}</a><a href="Site-Projects.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.projects}}</a><a href="Site-Writing.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.writing}}</a><a href="Site-Videos.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.videos}}</a><a href="Site-About.dc.html" aria-current="page" style="text-decoration: none; color: #61AFEF;">{{t.about}}</a></nav><div style="display: flex; gap: 4px;"><button type="button" aria-pressed="{{isEn}}" onClick="{{setEn}}" style="min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid #3A3F4B; border-radius: 6px; font: inherit; cursor: pointer; background: {{enBg}}; color: {{enFg}};">en</button><button type="button" aria-pressed="{{isEs}}" onClick="{{setEs}}" style="min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid #3A3F4B; border-radius: 6px; font: inherit; cursor: pointer; background: {{esBg}}; color: {{esFg}};">es</button></div></header>
+<section style="display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 48px; align-items: start;">
+<img src="/_blob/d319c9297dc85b094de59d3bdc722516" alt="Daniel Guzman" style="width: 240px; height: 240px; border-radius: 16px; object-fit: cover; box-shadow: 0 0 0 1px #3A3F4B;">
+<div style="display: flex; flex-direction: column; gap: 18px;"><h1 style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.02em;">{{t.about}}</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.7; color: #C0C5CE;">{{t.p1}}</p><p style="margin: 0; font-size: 17px; line-height: 1.7; color: #C0C5CE;">{{t.p2}}</p><p style="margin: 0; font-size: 17px; line-height: 1.7; color: #C0C5CE;">{{t.p3}}</p></div></section>
+<section style="display: flex; flex-direction: column;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.nowL}}</h2>
+<a href="Site-Project-Admitidos.dc.html" style="text-decoration: none; color: #D7DAE0; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid #3A3F4B;"><span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 19px; font-weight: 500;">Admitidos</span><span style="font-size: 16px; color: #949AA6; line-height: 1.55;">{{t.adNow}}</span></span><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #98C379; white-space: nowrap;">{{t.nowBuild}}</span></a>
+<a href="Site-Project-MakerLab.dc.html" style="text-decoration: none; color: #D7DAE0; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid #3A3F4B;"><span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 19px; font-weight: 500;">MakerLab Perú</span><span style="font-size: 16px; color: #949AA6; line-height: 1.55;">{{t.nowMk}}</span></span><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #C678DD; white-space: nowrap;">{{t.nowTeach}}</span></a>
+</section>
+<section style="display: flex; flex-direction: column;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.prevL}}</h2>
+<div style="text-decoration: none; color: #D7DAE0; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid #3A3F4B;"><span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 19px; font-weight: 500;">PUCP</span><span style="font-size: 16px; color: #949AA6; line-height: 1.55;">{{t.pucp}}</span></span><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6; white-space: nowrap;">— 2025</span></div>
+</section>
+<section style="display: flex; flex-direction: column; gap: 12px;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.elseL}}</h2>
+<div style="display: flex; gap: 24px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px;"><a href="#" style="color: #61AFEF;">github</a><a href="#" style="color: #61AFEF;">linkedin</a><a href="#" style="color: #61AFEF;">youtube</a></div></section>
+<div style="margin-top: auto;"><footer style="display: flex; justify-content: space-between; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6; border-top: 1px solid #3A3F4B; padding-top: 20px;"><span>© daniel guzman — {{t.made}}</span><span style="display: flex; gap: 20px;"><a href="#" style="color: #D7DAE0;">github</a><a href="#" style="color: #D7DAE0;">linkedin</a><a href="#" style="color: #D7DAE0;">youtube</a></span></footer></div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 1320}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { lang: 'en' }; }
+  renderVals() {
+    const T = {"en": {"home": "home", "projects": "projects", "writing": "writing", "videos": "videos", "about": "about", "made": "made in lima", "progress": "In progress", "w0": "building…", "w1": "thinking…", "w2": "testing…", "w3": "pivoting…", "postTitle": "Shipping with AI agents without losing control of the “how”", "postDesc": "What building CoCapital taught me about letting agents make architecture decisions, and what I changed.", "enOnly": "", "tagEng": "engineering", "tagLearn": "learning", "tagNotes": "notes", "videoTitle": "Building Admitidos, part 1", "videoNote": "in spanish", "mkTitle": "From workshop to self-paced manual", "mkDesc": "Not everyone learned at the same pace, so I turned an AI workshop into a self-paced manual, answered questions along the way, and built a tool to produce those manuals.", "adNow": "For students in Peru getting into university. Right now: an admissions results portal.", "coDesc": "A shared-capital tracker for partners. It started with two friends and S/ 1,000.", "trDesc": "An electronic invoicing API for Peruvian developers, built on SUNAT’s rules.", "live": "live", "wip": "in progress", "back": "← back", "p1": "I'm Daniel Guzman, a fullstack engineer from Lima, Peru. I build learning products with AI.", "p2": "I work remotely as a fullstack engineer at Kilo, a US fitness-tech company. I also mentor and facilitate AI workshops at MakerLab Perú.", "p3": "Right now I'm building Admitidos, for students in Peru getting into university, and writing about what I learn along the way.", "nowL": "now", "prevL": "before", "elseL": "elsewhere", "nowBuild": "building", "nowTeach": "teaching", "nowMk": "Mentor and AI workshop facilitator.", "pucp": "Teaching assistant."}, "es": {"home": "inicio", "projects": "proyectos", "writing": "escritos", "videos": "videos", "about": "sobre mí", "made": "hecho en lima", "progress": "En progreso", "w0": "construyendo…", "w1": "pensando…", "w2": "probando…", "w3": "pivoteando…", "postTitle": "Shipping with AI agents without losing control of the “how”", "postDesc": "Lo que aprendí construyendo CoCapital sobre dejar que los agentes decidan la arquitectura, y qué cambié.", "enOnly": "artículo en inglés", "tagEng": "ingeniería", "tagLearn": "aprendizaje", "tagNotes": "notas", "videoTitle": "Construyendo Admitidos, parte 1", "videoNote": "en español", "mkTitle": "Del taller al manual autoguiado", "mkDesc": "No todos aprendían al mismo ritmo, así que convertí un taller de IA en un manual autoguiado, resolví dudas en el camino y construí una herramienta para producir esos manuales.", "adNow": "Para estudiantes que postulan a la universidad en Perú. Ahora mismo: un portal de resultados de admisión.", "coDesc": "App de capital compartido para socios. Empezó con dos amigos y S/ 1,000.", "trDesc": "Una API de facturación electrónica para desarrolladores peruanos, basada en las reglas de SUNAT.", "live": "en vivo", "wip": "en progreso", "back": "← volver", "p1": "Soy Daniel Guzman, ingeniero fullstack de Lima, Perú. Construyo productos de aprendizaje con IA.", "p2": "Trabajo de forma remota como ingeniero fullstack en Kilo, una empresa estadounidense de tecnología fitness. También soy mentor y facilitador de talleres de IA en MakerLab Perú.", "p3": "Ahora mismo construyo Admitidos, para estudiantes que postulan a la universidad en Perú, y escribo sobre lo que aprendo en el camino.", "nowL": "ahora", "prevL": "antes", "elseL": "en otros lados", "nowBuild": "construyendo", "nowTeach": "enseñando", "nowMk": "Mentor y facilitador de talleres de IA.", "pucp": "Jefe de práctica."}};
+    const es = this.state.lang === 'es';
+    const t = T[this.state.lang];
+    
+    return {
+      t, isEn: !es, isEs: es,
+      enBg: es ? 'transparent' : '#3E4451', enFg: es ? '#949AA6' : '#D7DAE0',
+      esBg: es ? '#3E4451' : 'transparent', esFg: es ? '#D7DAE0' : '#949AA6',
+      setEn: () => this.setState({ lang: 'en' }), setEs: () => this.setState({ lang: 'es' })
+    };
+  }
+}
+</script>
+</body>
+</html>

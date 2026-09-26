@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Videos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+.status{position:relative;display:inline-block;height:20px;width:170px;vertical-align:middle}
+.status .w{position:absolute;left:0;top:0;opacity:0;white-space:nowrap;animation:cycle 8s infinite}
+.status .w1{animation-delay:0s}.status .w2{animation-delay:2s}.status .w3{animation-delay:4s}.status .w4{animation-delay:6s}
+.status .w::after{content:attr(data-text);position:absolute;left:0;top:0;color:transparent;background:linear-gradient(90deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:shimmer 1.8s linear infinite}
+.star{display:inline-block;animation:spin 3s linear infinite}
+@keyframes cycle{0%{opacity:0;transform:translateY(4px)}4%,21%{opacity:1;transform:none}25%,100%{opacity:0;transform:translateY(-4px)}}
+@keyframes shimmer{from{background-position:150% 0}to{background-position:-100% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.status .w{animation:none}.status .w1{opacity:1}.status .w::after{animation:none;background:none}.star{animation:none}}
+a{text-underline-offset:4px} a:hover{color:#FFFFFF !important}
+body{margin:0;background:#282C34}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; background: #282C34; color: #D7DAE0; font-family: 'Geist', 'Helvetica Neue', sans-serif; padding: 56px 0 56px 260px;">
+<div style="width: 820px; min-height: 100%; display: flex; flex-direction: column; gap: 64px;">
+<header style="display: flex; justify-content: space-between; align-items: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px;"><nav aria-label="Main" style="display: flex; gap: 24px;"><a href="Site-Home.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.home}}</a><a href="Site-Projects.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.projects}}</a><a href="Site-Writing.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.writing}}</a><a href="Site-Videos.dc.html" aria-current="page" style="text-decoration: none; color: #61AFEF;">{{t.videos}}</a><a href="Site-About.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.about}}</a></nav><div style="display: flex; gap: 4px;"><button type="button" aria-pressed="{{isEn}}" onClick="{{setEn}}" style="min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid #3A3F4B; border-radius: 6px; font: inherit; cursor: pointer; background: {{enBg}}; color: {{enFg}};">en</button><button type="button" aria-pressed="{{isEs}}" onClick="{{setEs}}" style="min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid #3A3F4B; border-radius: 6px; font: inherit; cursor: pointer; background: {{esBg}}; color: {{esFg}};">es</button></div></header>
+<section style="display: flex; flex-direction: column; gap: 14px;"><h1 style="margin: 0; font-size: 44px; font-weight: 600; letter-spacing: -0.02em;">{{t.videos}}</h1><p style="margin: 0; font-size: 19px; line-height: 1.6; color: #C0C5CE;">{{t.intro}}</p></section>
+<a href="#" style="text-decoration: none; color: #D7DAE0; display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 28px; align-items: center; padding: 24px 0; border-top: 1px solid #3A3F4B; border-bottom: 1px solid #3A3F4B;">
+<div style="height: 158px; border-radius: 8px; background: #21252B; border: 1px solid #3A3F4B; display: flex; align-items: center; justify-content: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6;">[THUMBNAIL]</div>
+<div style="display: flex; flex-direction: column; gap: 10px;">
+<p style="margin: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6;">[date] · {{t.videoNote}} · <span style="color: #61AFEF;">admitidos</span></p>
+<h2 style="margin: 0; font-size: 26px; font-weight: 600;">{{t.videoTitle}}</h2>
+<p style="margin: 0; font-size: 16px; color: #949AA6; line-height: 1.55;">{{t.vDesc}}</p>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: #61AFEF;">{{t.watch}}</span>
+</div></a>
+<div style="margin-top: auto;"><footer style="display: flex; justify-content: space-between; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6; border-top: 1px solid #3A3F4B; padding-top: 20px;"><span>© daniel guzman — {{t.made}}</span><span style="display: flex; gap: 20px;"><a href="#" style="color: #D7DAE0;">github</a><a href="#" style="color: #D7DAE0;">linkedin</a><a href="#" style="color: #D7DAE0;">youtube</a></span></footer></div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 1000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { lang: 'en' }; }
+  renderVals() {
+    const T = {"en": {"home": "home", "projects": "projects", "writing": "writing", "videos": "videos", "about": "about", "made": "made in lima", "progress": "In progress", "w0": "building…", "w1": "thinking…", "w2": "testing…", "w3": "pivoting…", "postTitle": "Shipping with AI agents without losing control of the “how”", "postDesc": "What building CoCapital taught me about letting agents make architecture decisions, and what I changed.", "enOnly": "", "tagEng": "engineering", "tagLearn": "learning", "tagNotes": "notes", "videoTitle": "Building Admitidos, part 1", "videoNote": "in spanish", "mkTitle": "From workshop to self-paced manual", "mkDesc": "Not everyone learned at the same pace, so I turned an AI workshop into a self-paced manual, answered questions along the way, and built a tool to produce those manuals.", "adNow": "For students in Peru getting into university. Right now: an admissions results portal.", "coDesc": "A shared-capital tracker for partners. It started with two friends and S/ 1,000.", "trDesc": "An electronic invoicing API for Peruvian developers, built on SUNAT’s rules.", "live": "live", "wip": "in progress", "back": "← back", "intro": "I record myself building my projects, as it happens. Videos are in Spanish.", "vDesc": "[One line on what this episode covers.]", "watch": "watch on youtube →"}, "es": {"home": "inicio", "projects": "proyectos", "writing": "escritos", "videos": "videos", "about": "sobre mí", "made": "hecho en lima", "progress": "En progreso", "w0": "construyendo…", "w1": "pensando…", "w2": "probando…", "w3": "pivoteando…", "postTitle": "Shipping with AI agents without losing control of the “how”", "postDesc": "Lo que aprendí construyendo CoCapital sobre dejar que los agentes decidan la arquitectura, y qué cambié.", "enOnly": "artículo en inglés", "tagEng": "ingeniería", "tagLearn": "aprendizaje", "tagNotes": "notas", "videoTitle": "Construyendo Admitidos, parte 1", "videoNote": "en español", "mkTitle": "Del taller al manual autoguiado", "mkDesc": "No todos aprendían al mismo ritmo, así que convertí un taller de IA en un manual autoguiado, resolví dudas en el camino y construí una herramienta para producir esos manuales.", "adNow": "Para estudiantes que postulan a la universidad en Perú. Ahora mismo: un portal de resultados de admisión.", "coDesc": "App de capital compartido para socios. Empezó con dos amigos y S/ 1,000.", "trDesc": "Una API de facturación electrónica para desarrolladores peruanos, basada en las reglas de SUNAT.", "live": "en vivo", "wip": "en progreso", "back": "← volver", "intro": "Me grabo construyendo mis proyectos, tal como pasa. Los videos son en español.", "vDesc": "[Una línea sobre qué cubre este episodio.]", "watch": "ver en youtube →"}};
+    const es = this.state.lang === 'es';
+    const t = T[this.state.lang];
+    
+    return {
+      t, isEn: !es, isEs: es,
+      enBg: es ? 'transparent' : '#3E4451', enFg: es ? '#949AA6' : '#D7DAE0',
+      esBg: es ? '#3E4451' : 'transparent', esFg: es ? '#D7DAE0' : '#949AA6',
+      setEn: () => this.setState({ lang: 'en' }), setEs: () => this.setState({ lang: 'es' })
+    };
+  }
+}
+</script>
+</body>
+</html>

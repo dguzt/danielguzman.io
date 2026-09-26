@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project — CoCapital</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+.status{position:relative;display:inline-block;height:20px;width:170px;vertical-align:middle}
+.status .w{position:absolute;left:0;top:0;opacity:0;white-space:nowrap;animation:cycle 8s infinite}
+.status .w1{animation-delay:0s}.status .w2{animation-delay:2s}.status .w3{animation-delay:4s}.status .w4{animation-delay:6s}
+.status .w::after{content:attr(data-text);position:absolute;left:0;top:0;color:transparent;background:linear-gradient(90deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:shimmer 1.8s linear infinite}
+.star{display:inline-block;animation:spin 3s linear infinite}
+@keyframes cycle{0%{opacity:0;transform:translateY(4px)}4%,21%{opacity:1;transform:none}25%,100%{opacity:0;transform:translateY(-4px)}}
+@keyframes shimmer{from{background-position:150% 0}to{background-position:-100% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.status .w{animation:none}.status .w1{opacity:1}.status .w::after{animation:none;background:none}.star{animation:none}}
+a{text-underline-offset:4px} a:hover{color:#FFFFFF !important}
+body{margin:0;background:#282C34}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1440px; box-sizing: border-box; background: #282C34; color: #D7DAE0; font-family: 'Geist', 'Helvetica Neue', sans-serif; padding: 56px 0 56px 260px;">
+<div style="width: 820px; min-height: 100%; display: flex; flex-direction: column; gap: 64px;">
+<header style="display: flex; justify-content: space-between; align-items: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px;"><nav aria-label="Main" style="display: flex; gap: 24px;"><a href="Site-Home.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.home}}</a><a href="Site-Projects.dc.html" aria-current="page" style="text-decoration: none; color: #61AFEF;">{{t.projects}}</a><a href="Site-Writing.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.writing}}</a><a href="Site-Videos.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.videos}}</a><a href="Site-About.dc.html" style="text-decoration: none; color: #D7DAE0;">{{t.about}}</a></nav><div style="display: flex; gap: 4px;"><button type="button" aria-pressed="{{isEn}}" onClick="{{setEn}}" style="min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid #3A3F4B; border-radius: 6px; font: inherit; cursor: pointer; background: {{enBg}}; color: {{enFg}};">en</button><button type="button" aria-pressed="{{isEs}}" onClick="{{setEs}}" style="min-height: 44px; min-width: 44px; padding: 0 12px; border: 1px solid #3A3F4B; border-radius: 6px; font: inherit; cursor: pointer; background: {{esBg}}; color: {{esFg}};">es</button></div></header>
+<section style="display: flex; flex-direction: column; gap: 18px;"><a href="Site-Projects.dc.html" style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: #949AA6; text-decoration: none;">{{t.back}}</a>
+<div style="display: flex; justify-content: space-between; align-items: baseline;"><h1 style="margin: 0; font-size: 52px; font-weight: 600; letter-spacing: -0.02em;">CoCapital</h1><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: #98C379;">● {{t.live}}</span></div>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #C0C5CE;">{{t.coDesc}}</p></section>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 20px 0; border-top: 1px solid #3A3F4B; border-bottom: 1px solid #3A3F4B;"><div><dt style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6;">{{t.mRole}}</dt><dd style="margin: 6px 0 0; font-size: 16px;">{{t.roleV}}</dd></div><div><dt style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6;">{{t.mStack}}</dt><dd style="margin: 6px 0 0; font-size: 16px;">[STACK]</dd></div><div><dt style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6;">{{t.mLinks}}</dt><dd style="margin: 6px 0 0; font-size: 16px;">[DEMO] · [REPO]</dd></div></dl>
+<section style="display: flex; flex-direction: column; gap: 12px;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.hProblem}}</h2><p style="margin: 0; font-size: 17px; line-height: 1.7; color: #C0C5CE;">{{t.problem}}</p></section>
+<section style="display: flex; flex-direction: column; gap: 12px;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.hBuilt}}</h2><p style="margin: 0; font-size: 17px; line-height: 1.7; color: #C0C5CE;">{{t.built}}</p></section>
+<section style="display: flex; flex-direction: column; gap: 12px;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.hHow}}</h2><p style="margin: 0; font-size: 17px; line-height: 1.7; color: #C0C5CE;">{{t.how}}</p></section>
+<section style="display: flex; flex-direction: column;"><h2 style="margin: 0 0 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500; color: #949AA6;">## {{t.related}}</h2><a href="Site-Post.dc.html" style="text-decoration: none; color: #D7DAE0; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid #3A3F4B;"><span style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 19px; font-weight: 500;">{{t.postTitle}}</span><span style="font-size: 16px; color: #949AA6; line-height: 1.55;">{{t.postDesc}}</span></span><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6; white-space: nowrap;">post</span></a></section>
+<div style="margin-top: auto;"><footer style="display: flex; justify-content: space-between; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #949AA6; border-top: 1px solid #3A3F4B; padding-top: 20px;"><span>© daniel guzman — {{t.made}}</span><span style="display: flex; gap: 20px;"><a href="#" style="color: #D7DAE0;">github</a><a href="#" style="color: #D7DAE0;">linkedin</a><a href="#" style="color: #D7DAE0;">youtube</a></span></footer></div>
+</div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 1440, "height": 1440}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { lang: 'en' }; }
+  renderVals() {
+    const T = {"en": {"home": "home", "projects": "projects", "writing": "writing", "videos": "videos", "about": "about", "made": "made in lima", "progress": "In progress", "w0": "building…", "w1": "thinking…", "w2": "testing…", "w3": "pivoting…", "postTitle": "Shipping with AI agents without losing control of the “how”", "postDesc": "What building CoCapital taught me about letting agents make architecture decisions, and what I changed.", "enOnly": "", "tagEng": "engineering", "tagLearn": "learning", "tagNotes": "notes", "videoTitle": "Building Admitidos, part 1", "videoNote": "in spanish", "mkTitle": "From workshop to self-paced manual", "mkDesc": "Not everyone learned at the same pace, so I turned an AI workshop into a self-paced manual, answered questions along the way, and built a tool to produce those manuals.", "adNow": "For students in Peru getting into university. Right now: an admissions results portal.", "coDesc": "A shared-capital tracker for partners. It started with two friends and S/ 1,000.", "trDesc": "An electronic invoicing API for Peruvian developers, built on SUNAT’s rules.", "live": "live", "wip": "in progress", "back": "← back", "mRole": "role", "mStack": "stack", "mLinks": "links", "related": "related", "hProblem": "the problem", "hNow": "what i'm building now", "hLearning": "what i'm learning", "hBuilt": "what i built", "hHow": "how i built it", "roleV": "[YOUR ROLE]", "problem": "Two friends pooled S/ 1,000 and tracked it in a messy spreadsheet. Nobody was sure how much each partner had, or who owed what.", "built": "Partners log movements in seconds, see the shared capital in real time, and lend money with an auto-generated payment schedule.", "how": "With AI agents, and learning not to let them make the architecture decisions for me. The full story is in the post below."}, "es": {"home": "inicio", "projects": "proyectos", "writing": "escritos", "videos": "videos", "about": "sobre mí", "made": "hecho en lima", "progress": "En progreso", "w0": "construyendo…", "w1": "pensando…", "w2": "probando…", "w3": "pivoteando…", "postTitle": "Shipping with AI agents without losing control of the “how”", "postDesc": "Lo que aprendí construyendo CoCapital sobre dejar que los agentes decidan la arquitectura, y qué cambié.", "enOnly": "artículo en inglés", "tagEng": "ingeniería", "tagLearn": "aprendizaje", "tagNotes": "notas", "videoTitle": "Construyendo Admitidos, parte 1", "videoNote": "en español", "mkTitle": "Del taller al manual autoguiado", "mkDesc": "No todos aprendían al mismo ritmo, así que convertí un taller de IA en un manual autoguiado, resolví dudas en el camino y construí una herramienta para producir esos manuales.", "adNow": "Para estudiantes que postulan a la universidad en Perú. Ahora mismo: un portal de resultados de admisión.", "coDesc": "App de capital compartido para socios. Empezó con dos amigos y S/ 1,000.", "trDesc": "Una API de facturación electrónica para desarrolladores peruanos, basada en las reglas de SUNAT.", "live": "en vivo", "wip": "en progreso", "back": "← volver", "mRole": "rol", "mStack": "stack", "mLinks": "links", "related": "relacionado", "hProblem": "el problema", "hNow": "lo que construyo ahora", "hLearning": "lo que estoy aprendiendo", "hBuilt": "lo que construí", "hHow": "cómo lo construí", "roleV": "[TU ROL]", "problem": "Dos amigos juntaron S/ 1,000 y lo controlaban en un Excel desordenado. Nadie tenía claro cuánto tenía cada socio ni quién debía qué.", "built": "Los socios registran movimientos en segundos, ven el capital compartido en tiempo real y prestan dinero con un cronograma de pagos automático.", "how": "Con agentes de IA, y aprendiendo a no dejar que decidan la arquitectura por mí. La historia completa está en el artículo de abajo."}};
+    const es = this.state.lang === 'es';
+    const t = T[this.state.lang];
+    
+    return {
+      t, isEn: !es, isEs: es,
+      enBg: es ? 'transparent' : '#3E4451', enFg: es ? '#949AA6' : '#D7DAE0',
+      esBg: es ? '#3E4451' : 'transparent', esFg: es ? '#D7DAE0' : '#949AA6',
+      setEn: () => this.setState({ lang: 'en' }), setEs: () => this.setState({ lang: 'es' })
+    };
+  }
+}
+</script>
+</body>
+</html>
