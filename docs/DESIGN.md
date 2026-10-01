@@ -24,7 +24,7 @@ This is the source of truth for **what** the site is. `MANUAL.md` covers **how**
 - English is the default. Spanish lives under `/es/`.
 - UI and fixed pages (home, projects, videos, about) are fully translated.
 - Posts are **not** mandatory translations. A post exists in Spanish only if Daniel writes it. In the Spanish UI, English-only posts show an "Artículo en inglés" badge.
-- Videos are in Spanish. The UI says so.
+- Videos are in Spanish. The UI says so. _(Deferred: no videos section until the YouTube channel opens. See §7.)_
 
 ## 4. Sitemap
 
@@ -35,22 +35,21 @@ This is the source of truth for **what** the site is. `MANUAL.md` covers **how**
 /writing               Posts feed (tags: engineering, learning, notes)
 /writing/tag/[tag]     Posts by tag (static pages, no client JS)
 /writing/[slug]        Post
-/videos                Videos (link out to YouTube)
 /about                 About
 /es/...                Spanish mirror of the above
 
+Deferred: /videos (when the YouTube channel opens)
 Phase 2: /para-docentes (Spanish-first page for teachers and schools)
 Phase 3: /talks (visible from ~3 entries; audience filter + role tag)
 ```
 
 ## 5. Page content (launch)
 
-- **Home:** photo, name, tagline, location, social links → Admitidos (currently building, with status loop) → MakerLab (learning design) → latest post → latest video → "Also built: CoCapital, Tributo".
+- **Home:** photo, name, tagline, location, social links → Admitidos (currently building, with status loop) → MakerLab (learning design) → latest post → "Also built: CoCapital, Tributo".
 - **Projects:** "Learning products" (Admitidos, MakerLab) and "Other builds" (CoCapital, Tributo). A project gets a link only when its page is ready.
 - **Project page:** back link, title, status, one-liner, meta (role, stack, links), then sections: problem → what I built / am building → what I'm learning → related content.
 - **Writing:** intro, tag filter, list. Empty tags show "nothing here yet".
 - **Post:** back link, date, tag, reading time, title, body, related project.
-- **Videos:** intro (videos are in Spanish), list with thumbnail, date, project, link to YouTube.
 - **About:** photo, three short paragraphs, "now", "before" (PUCP until 2025), "elsewhere".
 - **No email address** on the site for now.
 
@@ -86,8 +85,8 @@ Phase 3: /talks (visible from ~3 entries; audience filter + role tag)
 
 ### Components (from the prototype)
 
-- **Header:** nav (home, projects, writing, videos, about) + EN/ES toggle. Active item in blue with `aria-current="page"`.
-- **Footer:** © + "made in lima" + social links.
+- **Header:** nav (home, projects, writing, about) + EN/ES toggle. Active item in blue with `aria-current="page"`.
+- **Footer:** © + "made in lima" + social links (GitHub, LinkedIn).
 - **SectionHeading:** mono, muted, prefixed with `## `.
 - **Row:** title + description on the left, meta on the right; whole row is a link when it has a destination.
 - **StatusLoop:** see below.
@@ -108,17 +107,24 @@ Replaces a static "in progress" label with a Claude-style reasoning loop: `✻ b
 ## 7. Deferred (not in launch)
 
 - **Hero neuron effect:** glowing neurons that light up the longer the cursor rests on them (Hollow Knight–style lighting). A separate mini-project. When built: Astro island with `client:visible`, pause offscreen and on hidden tabs, cap pixel ratio at 2, fewer neurons on mobile, avoid canvas `shadowBlur` (pre-render glows).
+- **Videos (pending):** the `/videos` page, the home "latest video" row, the YouTube social link and the `nav.videos` entry. Return when Daniel opens the YouTube channel. The prototype (`Site-Videos.dc.html`, `copy.*.json` → `Videos`) still holds the design.
 - Teachers page, talks section, repo index, other themes.
 
 ## 8. Decision log
 
-| Decision                                                 | Why                                                                   |
-| -------------------------------------------------------- | --------------------------------------------------------------------- |
-| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                          |
-| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story              |
-| Only show what's being built now                         | Announcing future features creates promises that can backfire         |
-| Rows over cards                                          | Linear reading order; simpler responsive behavior                     |
-| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four                |
-| No hero animation at launch                              | Performance; the effect becomes its own project                       |
-| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise                   |
-| Tailwind CSS 4 for styling, tokens in `@theme`           | Daniel already knows Tailwind; tokens stay the single source of truth |
+| Decision                                                 | Why                                                                             |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                                    |
+| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story                        |
+| Only show what's being built now                         | Announcing future features creates promises that can backfire                   |
+| Rows over cards                                          | Linear reading order; simpler responsive behavior                               |
+| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four                          |
+| No hero animation at launch                              | Performance; the effect becomes its own project                                 |
+| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise                             |
+| Tailwind CSS 4 for styling, tokens in `@theme`           | Daniel already knows Tailwind; tokens stay the single source of truth           |
+| Fonts through Astro's Fonts API (Fontsource provider)    | Self-hosted at build time, metric-matched fallbacks, no third-party requests    |
+| `--color-white` token for link hover                     | The prototype's hover used a raw `#FFFFFF`                                      |
+| Off-scale prototype values snapped to the scale          | 48→52 (MakerLab title), 18→17 (post body), 15→14 (About links), `#7F848E`→muted |
+| Language toggle and tag filter are links, not buttons    | Each language and tag has its own URL; no JavaScript needed                     |
+| StatusLoop shimmer runs on the word cycle                | The prototype's independent 1.8s shimmer got cut off mid-word                   |
+| Videos deferred                                          | The YouTube channel isn't open yet; only publish what exists                    |
