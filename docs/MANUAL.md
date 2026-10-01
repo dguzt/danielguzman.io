@@ -99,10 +99,24 @@ design-reference/      # Approved prototype (read-only)
 1. Edit both languages in `src/i18n/ui.ts`. A missing key should fail the type check.
 2. Check `/` and `/es/` pages.
 
+### Update the link preview image
+
+Slack, WhatsApp and LinkedIn show `public/og.png` (1200 × 630) when someone shares a link. `Seo.astro` renders the Open Graph tags on every page through `BaseLayout`.
+
+1. Edit `docs/design/og-card.html` (it reads the photo from `src/assets/`).
+2. Render it:
+   ```bash
+   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+     --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=8000 \
+     --screenshot="$PWD/public/og.png" "file://$PWD/docs/design/og-card.html"
+   ```
+3. Keep it PNG or JPG and under ~300 KB (WhatsApp skips larger images). The file name stays `og.png` so its URL never changes.
+4. Apps cache previews. Test with a throwaway query (`https://danielguzman.io/?v=2`) or [opengraph.xyz](https://www.opengraph.xyz).
+
 ### Update the profile photo
 
 1. Replace the file in `src/assets/`. Keep it square, face well lit, simple background.
-2. It appears on Home (circle) and About (rounded square).
+2. It appears on Home (circle) and About (rounded square), and in the link preview card: regenerate `public/og.png` after changing it.
 
 ---
 

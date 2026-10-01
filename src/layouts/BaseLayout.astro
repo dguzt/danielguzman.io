@@ -3,6 +3,7 @@ import { Font } from 'astro:assets';
 import CloudflareAnalytics from '@/components/CloudflareAnalytics.astro';
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
+import Seo from '@/components/Seo.astro';
 import { defaultLang, type Lang } from '@/i18n/ui';
 import { author } from '@/lib/site';
 import '@/styles/global.css';
@@ -20,13 +21,13 @@ const { title, description, lang = defaultLang } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <meta name="author" content={author} />
     <meta name="color-scheme" content="dark" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
+    <Seo title={title} description={description} lang={lang} />
     <Font cssVariable="--font-geist" preload={[{ subset: 'latin' }]} />
     <Font cssVariable="--font-geist-mono" />
     <CloudflareAnalytics token="cf3d7f393c204cfebee88efc82d8f8c0" />

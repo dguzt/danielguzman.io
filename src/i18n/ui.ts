@@ -7,6 +7,7 @@ export const defaultLang: Lang = 'en';
 const en = {
   'site.description':
     'Daniel Guzman is an engineer from Lima, Peru, who builds learning products with AI.',
+  'site.ogImageAlt': 'Daniel Guzman, an engineer from Lima, Peru. I build things that teach.',
   'nav.label': 'Main',
   'nav.home': 'home',
   'nav.projects': 'projects',
@@ -37,6 +38,7 @@ export type UiKey = keyof typeof en;
 const es: Record<UiKey, string> = {
   'site.description':
     'Daniel Guzman es un ingeniero de Lima, Perú, que construye productos de aprendizaje con IA.',
+  'site.ogImageAlt': 'Daniel Guzman, ingeniero de Lima, Perú. Construyo cosas que enseñan.',
   'nav.label': 'Principal',
   'nav.home': 'inicio',
   'nav.projects': 'proyectos',
