@@ -1,0 +1,5 @@
+dist/
+.astro/
+design-reference/
+.learning/
+pnpm-lock.yaml

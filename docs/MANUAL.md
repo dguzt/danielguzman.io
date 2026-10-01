@@ -1,6 +1,6 @@
 # Maintenance Manual — danielguzman.io
 
-How the site is built, and how to keep it alive. This is a **living document**: update it at the end of every milestone. Sections marked *(confirm while building)* describe the plan; replace them with what you actually built.
+How the site is built, and how to keep it alive. This is a **living document**: update it at the end of every milestone. Sections marked _(confirm while building)_ describe the plan; replace them with what you actually built.
 
 ---
 
@@ -13,7 +13,7 @@ How the site is built, and how to keep it alive. This is a **living document**: 
 - **i18n:** Astro's built-in i18n routing. English at `/`, Spanish at `/es/`.
 - **Hosting:** Cloudflare (static), with Cloudflare Web Analytics (no cookies).
 
-### Folder structure *(confirm while building)*
+### Folder structure _(confirm while building)_
 
 ```
 src/
@@ -27,7 +27,7 @@ src/
 ├── lib/               # Pure functions: sorting, filtering by tag, reading time, dates
 ├── styles/            # tokens.css, global.css
 └── assets/            # Images processed by astro:assets
-docs/                  # DESIGN.md, MANUAL.md, LEARNING-LOG.md
+docs/                  # DESIGN.md, MANUAL.md
 design-reference/      # Approved prototype (read-only)
 ```
 
@@ -46,7 +46,10 @@ design-reference/      # Approved prototype (read-only)
 - **Files and slugs:** kebab-case (`shipping-with-agents.md`).
 - **Commits:** Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `style:`, `chore:`).
 - **Branches:** `main` is always deployable. Work on `feat/...` branches for anything bigger than a typo.
-- **Formatting and linting:** Prettier + ESLint with the Astro plugin *(confirm in M0)*.
+- **Formatting:** Prettier with `prettier-plugin-astro`, Airbnb-like options (single quotes, semicolons, trailing commas, width 100). `pnpm format` writes, `pnpm format:check` verifies.
+- **Linting:** ESLint 10 flat config: `@eslint/js` recommended, `typescript-eslint` strict + stylistic, `eslint-plugin-astro` recommended, plus a few Airbnb rules (`eqeqeq`, `curly`, `prefer-const`, `prefer-template`, `object-shorthand`, `no-var`, `no-param-reassign`). The official Airbnb config doesn't support ESLint 9+.
+- **Type checking:** `pnpm check` runs `astro check`. TypeScript is pinned to 6.0 because `typescript-eslint` and `@astrojs/check` don't support 7 yet.
+- **Node:** version pinned in `.nvmrc`; package manager is pnpm.
 - **TypeScript:** strict mode.
 
 ---
@@ -56,9 +59,9 @@ design-reference/      # Approved prototype (read-only)
 ### Publish a post
 
 1. Create `src/content/posts/<slug>.md` (or `.mdx`).
-2. Fill the frontmatter: `title`, `description`, `date`, `tag` (engineering | learning | notes), `lang`, optional `relatedProject`. *(confirm fields in M5)*
+2. Fill the frontmatter: `title`, `description`, `date`, `tag` (engineering | learning | notes), `lang`, optional `relatedProject`. _(confirm fields in M5)_
 3. Run the site locally and check: title, tag page, reading time, related project link.
-4. Spanish version? Only if you wrote it. Create it with the same slug under the Spanish folder *(confirm structure in M5)*.
+4. Spanish version? Only if you wrote it. Create it with the same slug under the Spanish folder _(confirm structure in M5)_.
 5. Commit: `feat(posts): add <slug>`.
 
 ### Add or update a project
@@ -100,11 +103,11 @@ design-reference/      # Approved prototype (read-only)
 - [ ] Images have `alt` text; decorative ones are `alt=""`.
 - [ ] No `[PLACEHOLDER]` text left on published pages.
 - [ ] No student data, secrets, or private info anywhere.
-- [ ] Lighthouse: performance, accessibility, SEO ≥ 95 *(target)*.
+- [ ] Lighthouse: performance, accessibility, SEO ≥ 95 _(target)_.
 
 ---
 
-## 5. Deployment *(confirm in M9)*
+## 5. Deployment _(confirm in M9)_
 
 - Push to `main` → Cloudflare builds and deploys.
 - Build command and output folder: document here once configured.
@@ -123,20 +126,20 @@ design-reference/      # Approved prototype (read-only)
 
 ## 7. Roadmap
 
-Each milestone ends with: a working build, a commit, and an update to this manual and `LEARNING-LOG.md`.
+Each milestone ends with: a working build, a commit, and an update to this manual. M9 (deploy) runs right after M0, so every later milestone ships to the live site.
 
-| # | Milestone | You'll learn |
-|---|---|---|
-| M0 | Project setup: scaffold Astro, TypeScript strict, Prettier, ESLint, git | Astro project structure, tooling |
-| M1 | Tokens, global styles, BaseLayout, Header, Footer | Layouts, components, props, slots |
-| M2 | i18n routing + UI dictionary + language switch | Astro i18n, typed dictionaries |
-| M3 | Home page (static data first) + StatusLoop | Composition, CSS-only animation, a11y |
-| M4 | Projects collection + Projects page + `[slug]` pages | Content collections, schemas, dynamic routes |
-| M5 | Posts collection + Writing page + tag pages + Post layout + RSS | Markdown, `getStaticPaths`, feeds |
-| M6 | Videos + About | Reusing components, `astro:assets` |
-| M7 | SEO: meta tags, Open Graph, sitemap | Head management, integrations |
-| M8 | Accessibility and performance audit | Lighthouse, reduced motion, focus |
-| M9 | Deploy to Cloudflare + analytics | Static hosting, CI basics |
+| #   | Milestone                                                               | You'll learn                                 |
+| --- | ----------------------------------------------------------------------- | -------------------------------------------- |
+| M0  | Project setup: scaffold Astro, TypeScript strict, Prettier, ESLint, git | Astro project structure, tooling             |
+| M1  | Tokens, global styles, BaseLayout, Header, Footer                       | Layouts, components, props, slots            |
+| M2  | i18n routing + UI dictionary + language switch                          | Astro i18n, typed dictionaries               |
+| M3  | Home page (static data first) + StatusLoop                              | Composition, CSS-only animation, a11y        |
+| M4  | Projects collection + Projects page + `[slug]` pages                    | Content collections, schemas, dynamic routes |
+| M5  | Posts collection + Writing page + tag pages + Post layout + RSS         | Markdown, `getStaticPaths`, feeds            |
+| M6  | Videos + About                                                          | Reusing components, `astro:assets`           |
+| M7  | SEO: meta tags, Open Graph, sitemap                                     | Head management, integrations                |
+| M8  | Accessibility and performance audit                                     | Lighthouse, reduced motion, focus            |
+| M9  | Deploy to Cloudflare + analytics                                        | Static hosting, CI basics                    |
 
 ---
 

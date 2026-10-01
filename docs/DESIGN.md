@@ -58,19 +58,19 @@ Phase 3: /talks (visible from ~3 entries; audience filter + role tag)
 
 ### Color tokens
 
-| Token | Value | Use |
-|---|---|---|
-| `--color-bg` | `#282C34` | Page background |
-| `--color-surface` | `#21252B` | Code blocks, thumbnails |
-| `--color-chip` | `#3E4451` | Active toggle / chip background |
-| `--color-line` | `#3A3F4B` | Dividers, borders |
-| `--color-fg` | `#D7DAE0` | Primary text |
-| `--color-soft` | `#C0C5CE` | Body paragraphs |
-| `--color-muted` | `#949AA6` | Secondary text, labels (lightened from the original theme for contrast) |
-| `--color-green` | `#98C379` | Tagline, "live", status loop |
-| `--color-blue` | `#61AFEF` | Active nav, links, tags |
-| `--color-yellow` | `#E5C07B` | "In progress" |
-| `--color-purple` | `#C678DD` | MakerLab / teaching accents |
+| Token             | Value     | Use                                                                     |
+| ----------------- | --------- | ----------------------------------------------------------------------- |
+| `--color-bg`      | `#282C34` | Page background                                                         |
+| `--color-surface` | `#21252B` | Code blocks, thumbnails                                                 |
+| `--color-chip`    | `#3E4451` | Active toggle / chip background                                         |
+| `--color-line`    | `#3A3F4B` | Dividers, borders                                                       |
+| `--color-fg`      | `#D7DAE0` | Primary text                                                            |
+| `--color-soft`    | `#C0C5CE` | Body paragraphs                                                         |
+| `--color-muted`   | `#949AA6` | Secondary text, labels (lightened from the original theme for contrast) |
+| `--color-green`   | `#98C379` | Tagline, "live", status loop                                            |
+| `--color-blue`    | `#61AFEF` | Active nav, links, tags                                                 |
+| `--color-yellow`  | `#E5C07B` | "In progress"                                                           |
+| `--color-purple`  | `#C678DD` | MakerLab / teaching accents                                             |
 
 ### Typography
 
@@ -112,12 +112,12 @@ Replaces a static "in progress" label with a Claude-style reasoning loop: `✻ b
 
 ## 8. Decision log
 
-| Decision | Why |
-|---|---|
-| Audience: edtech founders + LDT, not recruiters | Education is the destination; AI is the tool |
-| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story |
-| Only show what's being built now | Announcing future features creates promises that can backfire |
-| Rows over cards | Linear reading order; simpler responsive behavior |
-| One Dark only, no light mode | Clean, readable dark theme chosen after comparing four |
-| No hero animation at launch | Performance; the effect becomes its own project |
-| Tags as static pages | Zero JS, better SEO, a good Astro learning exercise |
+| Decision                                                 | Why                                                           |
+| -------------------------------------------------------- | ------------------------------------------------------------- |
+| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                  |
+| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story      |
+| Only show what's being built now                         | Announcing future features creates promises that can backfire |
+| Rows over cards                                          | Linear reading order; simpler responsive behavior             |
+| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four        |
+| No hero animation at launch                              | Performance; the effect becomes its own project               |
+| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise           |
