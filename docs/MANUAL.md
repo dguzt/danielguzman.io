@@ -122,7 +122,7 @@ design-reference/      # Approved prototype (read-only)
   - DNS: `www` is a proxied `AAAA` record to `100::`. It exists only so the redirect rule can catch `www` traffic.
   - Rules → Redirect Rules: "Redirect from WWW to root", 301, preserving path and query string.
   - SSL/TLS → Edge Certificates: **Always Use HTTPS** on.
-- **Analytics:** Cloudflare Web Analytics (no cookies).
+- **Analytics:** Cloudflare Web Analytics (no cookies), loaded by `src/components/CloudflareAnalytics.astro` from `BaseLayout`, in production builds only. Automatic injection doesn't work for Worker static assets, so the dashboard is set to "Enable with JS Snippet installation". The token is public by design. Preview deploys also report to it.
 
 ---
 

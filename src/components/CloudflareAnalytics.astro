@@ -1,0 +1,17 @@
+---
+interface Props {
+  token: string;
+}
+
+const { token } = Astro.props;
+const beacon = JSON.stringify({ token });
+---
+
+{import.meta.env.PROD && (
+  <script
+    is:inline
+    type="module"
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={beacon}
+  />
+)}
