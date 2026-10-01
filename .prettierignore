@@ -3,3 +3,4 @@ dist/
 design-reference/
 .learning/
 pnpm-lock.yaml
+docs/design/
