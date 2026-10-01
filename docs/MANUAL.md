@@ -111,12 +111,13 @@ design-reference/      # Approved prototype (read-only)
 
 ---
 
-## 5. Deployment _(confirm in M9)_
+## 5. Deployment
 
-- Push to `main` → Cloudflare builds and deploys.
-- Build command and output folder: document here once configured.
-- Analytics: Cloudflare Web Analytics.
-- Domain: `danielguzman.io`.
+- **Host:** Cloudflare Workers with static assets. No adapter and no server code: `wrangler.jsonc` only points Cloudflare at `dist/`, and Cloudflare serves those files from its edge.
+- **Builds:** Workers Builds, connected to `dguzt/danielguzman.io` on GitHub. Push to `main` deploys production; other branches get preview URLs.
+- **Build command:** `pnpm build`. **Deploy command:** `npx wrangler deploy`. Node comes from `.nvmrc`, pnpm from `packageManager` in `package.json`.
+- **Domain:** `danielguzman.io`, attached as a custom domain on the Worker.
+- **Analytics:** Cloudflare Web Analytics (no cookies).
 
 ---
 
