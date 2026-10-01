@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import profile from '@/assets/profile.jpeg';
+
+interface Props {
+  alt: string;
+  shape: 'circle' | 'rounded';
+}
+
+const { alt, shape } = Astro.props;
+const size = shape === 'circle' ? 176 : 240;
+---
+
+<Image
+  src={profile}
+  alt={alt}
+  width={size}
+  height={size}
+  densities={[1, 2]}
+  loading="eager"
+  class:list={[
+    'object-cover ring-1 ring-line',
+    shape === 'circle' ? 'size-44 rounded-full' : 'size-60 rounded-2xl',
+  ]}
+/>

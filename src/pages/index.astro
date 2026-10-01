@@ -1,16 +1,73 @@
 ---
+import FeaturedRow from '@/components/FeaturedRow.astro';
+import ProfilePhoto from '@/components/ProfilePhoto.astro';
+import Row from '@/components/Row.astro';
+import Section from '@/components/Section.astro';
+import SocialLinks from '@/components/SocialLinks.astro';
+import StatusLoop from '@/components/StatusLoop.astro';
+import { useTranslations } from '@/i18n/utils';
+import { currentProject, learningDesign, otherBuilds } from '@/lib/home-content';
+import { hrefIfBuilt } from '@/lib/routes';
+import { author } from '@/lib/site';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const name = 'Daniel Guzman';
-const tagline = 'I build things that teach.';
-const location = 'Lima, Peru';
-const description = `${name} is an engineer from ${location} who builds learning products with AI.`;
+const lang = 'en';
+const t = useTranslations(lang);
 ---
 
-<BaseLayout title={name} description={description}>
-  <main class="grid min-h-dvh place-content-center gap-3 px-6">
-    <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">{name}</h1>
-    <p class="text-lg text-green">{tagline}</p>
-    <p class="font-mono text-sm text-muted">{location}</p>
-  </main>
+<BaseLayout title={author} description={t('site.description')} lang={lang}>
+  <section class="flex flex-col gap-5.5">
+    <ProfilePhoto alt={author} shape="circle" />
+    <h1 class="text-4xl font-semibold tracking-tight md:text-5xl">{author}</h1>
+    <p class="font-mono text-lg text-green md:text-xl">{t('home.tagline')}</p>
+    <p class="font-mono text-sm text-muted">{t('home.location')}</p>
+    <div class="font-mono text-sm">
+      <SocialLinks lang={lang} />
+    </div>
+  </section>
+
+  <Section heading={t('home.building')}>
+    <FeaturedRow
+      title={currentProject.title}
+      description={currentProject.summary}
+      href={hrefIfBuilt(currentProject.href)}
+    >
+      <StatusLoop
+        slot="meta"
+        label={t('status.inProgress')}
+        words={[
+          t('status.building'),
+          t('status.thinking'),
+          t('status.testing'),
+          t('status.pivoting'),
+        ]}
+      />
+    </FeaturedRow>
+  </Section>
+
+  <Section heading={t('home.teaching')}>
+    <Row
+      title={learningDesign.title}
+      description={learningDesign.summary}
+      href={hrefIfBuilt(learningDesign.href)}
+    >
+      <span slot="meta">{learningDesign.label}</span>
+    </Row>
+  </Section>
+
+  <p class="font-mono text-sm text-muted">
+    {t('home.alsoBuilt')}:{' '}
+    {otherBuilds.map(({ label, href }, index) => (
+      <>
+        {hrefIfBuilt(href) ? (
+          <a href={href} class="text-fg hover:text-white">
+            {label}
+          </a>
+        ) : (
+          <span class="text-fg">{label}</span>
+        )}
+        {index < otherBuilds.length - 1 && ', '}
+      </>
+    ))}
+  </p>
 </BaseLayout>

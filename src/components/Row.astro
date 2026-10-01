@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  href?: string;
+}
+
+const { title, description, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  class="group flex flex-col gap-2 border-t border-line py-4.5 text-fg no-underline sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+>
+  <span class="flex flex-col gap-1.5">
+    <span class="text-lg font-medium group-hover:text-white">{title}</span>
+    {description && <span class="leading-relaxed text-muted">{description}</span>}
+  </span>
+  {Astro.slots.has('meta') && (
+    <span class="shrink-0 font-mono text-xs whitespace-nowrap text-muted">
+      <slot name="meta" />
+    </span>
+  )}
+</Tag>
