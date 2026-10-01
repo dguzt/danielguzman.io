@@ -12,22 +12,26 @@ How the site is built, and how to keep it alive. This is a **living document**: 
 - **JavaScript:** none by default. Add an island only when interaction truly needs it.
 - **i18n:** Astro's built-in i18n routing. English at `/`, Spanish at `/es/`.
 - **Hosting:** Cloudflare (static), with Cloudflare Web Analytics (no cookies).
+- **Fonts:** Geist and Geist Mono through Astro's Fonts API (`fonts` in `astro.config.mjs`, Fontsource provider). Astro downloads them at build time and serves them from the site, latin subset and upright styles only. `BaseLayout` renders `<Font>` for both; only Geist is preloaded. `tokens.css` maps `--font-sans` / `--font-mono` to the generated variables in `@theme inline`.
+- **Images:** `astro:assets` with Sharp (dev dependency) converts and resizes at build time.
 
-### Folder structure _(confirm while building)_
+### Folder structure
+
+Confirmed for M1 and the home page. `content/` and the Spanish routes arrive in M2–M5.
 
 ```
 src/
-├── components/        # Small, single-purpose UI pieces (Header, Footer, Row, StatusLoop…)
-├── layouts/           # Page shells (BaseLayout, ProjectLayout, PostLayout)
+├── components/        # Small, single-purpose UI pieces (Header, Footer, Row, StatusLoop…), flat
+├── layouts/           # Page shells: BaseLayout (column, Header, Footer around a <slot />)
 ├── pages/             # Routes only: compose layouts + components, fetch via lib/
 │   └── es/            # Spanish routes (or dynamic [lang] routing — decide in M2)
 ├── content/           # Markdown/MDX entries: projects/, posts/, videos/, talks/
 ├── content.config.ts  # Collection schemas (path may differ by Astro version)
-├── i18n/              # ui.ts (UI strings per language) + helpers (getLang, t())
-├── lib/               # Pure functions: sorting, filtering by tag, reading time, dates
+├── i18n/              # ui.ts (UI strings, en + es) + utils.ts (useTranslations)
+├── lib/               # site.ts (nav, social), routes.ts (isBuilt), paths.ts, home-content.ts (static until collections)
 ├── styles/            # tokens.css (@theme), global.css (Tailwind entry + base styles)
 └── assets/            # Images processed by astro:assets
-docs/                  # DESIGN.md, MANUAL.md
+docs/                  # DESIGN.md, MANUAL.md, design/frontend-blueprint.html
 design-reference/      # Approved prototype (read-only)
 ```
 
@@ -75,12 +79,17 @@ design-reference/      # Approved prototype (read-only)
 3. **Rule:** a project only gets a link when its README or demo is presentable.
 4. Never describe features that don't exist yet.
 
+### Add a page to the nav
+
+1. Create the page file in `src/pages/` (for example `about.astro`).
+2. That's it: `Nav` only shows items from `lib/site.ts` whose page exists (`lib/routes.ts` → `isBuilt`). The EN/ES toggle works the same way and appears once `/es/` exists. Rows and links on the home page use `hrefIfBuilt`, so they become links when their page ships.
+
 ### Change Admitidos' status loop
 
-- The words live in `src/i18n/ui.ts`. The animation lives in `StatusLoop.astro`. Change words there; don't touch the CSS unless the timing changes.
+- The words live in `src/i18n/ui.ts` (`status.*`). The animation lives in `StatusLoop.astro`. The shimmer shares the word cycle and delay, so it always finishes inside its word. Change words there; don't touch the CSS unless the timing changes.
 - Four words, 2s each. If you change the count, update the cycle duration and delays.
 
-### Add a video
+### Add a video _(deferred: no videos section yet, see DESIGN.md §7)_
 
 1. Create an entry in `src/content/videos/` with `title`, `date`, `youtubeUrl`, `project`, `thumbnail`.
 2. Thumbnails go in `src/assets/` so `astro:assets` optimizes them.
@@ -146,7 +155,7 @@ Each milestone ends with: a working build, a commit, and an update to this manua
 | M3  | Home page (static data first) + StatusLoop                              | Composition, CSS-only animation, a11y        |
 | M4  | Projects collection + Projects page + `[slug]` pages                    | Content collections, schemas, dynamic routes |
 | M5  | Posts collection + Writing page + tag pages + Post layout + RSS         | Markdown, `getStaticPaths`, feeds            |
-| M6  | Videos + About                                                          | Reusing components, `astro:assets`           |
+| M6  | About (Videos deferred until the YouTube channel opens)                 | Reusing components, `astro:assets`           |
 | M7  | SEO: meta tags, Open Graph, sitemap                                     | Head management, integrations                |
 | M8  | Accessibility and performance audit                                     | Lighthouse, reduced motion, focus            |
 | M9  | Deploy to Cloudflare + analytics                                        | Static hosting, CI basics                    |
@@ -156,3 +165,9 @@ Each milestone ends with: a working build, a commit, and an update to this manua
 ## 8. Troubleshooting
 
 Add entries here as you hit problems: symptom → cause → fix.
+
+- **Build fails with `MissingSharp`** → `astro:assets` needs Sharp to optimize images → `pnpm add -D sharp` (done in M1).
+- **Fonts API downloads italic files you don't use** → it fetches every style by default → set `styles: ['normal']` per family.
+- **ESLint `no-unknown-classes` on custom class names in a component `<style>`** → the Tailwind plugin only knows utilities → select with data attributes (`[data-word]`) instead of class names.
+- **An animation looks wrong right after editing its CSS** → hot reload keeps running animations instead of restarting them → hard reload (Cmd+Shift+R) before judging timing.
+- **Unknown URL shows a blank Cloudflare 404 in production** → Workers static assets default to no 404 page → `"not_found_handling": "404-page"` in `wrangler.jsonc` (set in M1).
