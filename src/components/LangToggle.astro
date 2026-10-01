@@ -1,0 +1,38 @@
+---
+import { languages, type Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import { isBuilt } from '@/lib/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const homeByLang: Record<Lang, string> = { en: '/', es: '/es/' };
+const options = (Object.keys(languages) as Lang[]).filter((option) => isBuilt(homeByLang[option]));
+---
+
+{options.length > 1 && (
+  <ul class="flex gap-1" aria-label={t('lang.label')}>
+    {options.map((option) => {
+      const current = option === lang;
+      return (
+        <li>
+          <a
+            href={homeByLang[option]}
+            hreflang={option}
+            lang={option}
+            aria-current={current ? 'true' : undefined}
+            class:list={[
+              'inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-line px-3 no-underline hover:text-white',
+              current ? 'bg-chip text-fg' : 'text-muted',
+            ]}
+          >
+            {option}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+)}

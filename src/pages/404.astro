@@ -1,0 +1,18 @@
+---
+import { useTranslations } from '@/i18n/utils';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('site.notFoundTitle')} description={t('notFound.body')} lang={lang}>
+  <section class="flex flex-col gap-5.5">
+    <p class="font-mono text-sm text-muted">{t('notFound.code')}</p>
+    <h1 class="text-4xl font-semibold tracking-tight">{t('notFound.title')}</h1>
+    <p class="text-md leading-relaxed text-soft">{t('notFound.body')}</p>
+    <a href="/" class="font-mono text-sm text-muted no-underline hover:text-white">
+      {t('notFound.home')}
+    </a>
+  </section>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import LangToggle from './LangToggle.astro';
+import Nav from './Nav.astro';
+import type { Lang } from '@/i18n/ui';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+---
+
+<header class="flex flex-wrap items-center justify-between gap-4 font-mono text-sm">
+  <Nav lang={lang} currentPath={currentPath} />
+  <LangToggle lang={lang} />
+</header>
