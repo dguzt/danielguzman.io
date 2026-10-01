@@ -48,9 +48,9 @@ design-reference/      # Approved prototype (read-only)
 - **Files and slugs:** kebab-case (`shipping-with-agents.md`).
 - **Commits:** Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, `style:`, `chore:`).
 - **Branches:** `main` is always deployable. Work on `feat/...` branches for anything bigger than a typo.
-- **Formatting:** Prettier with `prettier-plugin-astro`, Airbnb-like options (single quotes, semicolons, trailing commas, width 100). `pnpm format` writes, `pnpm format:check` verifies.
+- **Formatting:** Prettier with `prettier-plugin-astro`, Airbnb-like options (single quotes, semicolons, trailing commas, width 100). No trailing commas in `.jsonc`, so editors that validate it as JSON don't complain. `pnpm format` writes, `pnpm format:check` verifies.
 - **Linting:** ESLint 10 flat config: `@eslint/js` recommended, `typescript-eslint` strict + stylistic, `eslint-plugin-astro` recommended, plus a few Airbnb rules (`eqeqeq`, `curly`, `prefer-const`, `prefer-template`, `object-shorthand`, `no-var`, `no-param-reassign`). The official Airbnb config doesn't support ESLint 9+.
-- **Tailwind classes:** `eslint-plugin-better-tailwindcss` rejects unknown classes, conflicting classes and arbitrary values, and enforces Tailwind's official class order (`pnpm lint:fix` sorts them). `prettier-plugin-tailwindcss` sorts classes in the same order, but it doesn't handle `.astro` files yet (tailwindlabs/prettier-plugin-tailwindcss#451), so ESLint is the source of truth there.
+- **Tailwind classes:** `eslint-plugin-better-tailwindcss` rejects unknown classes, conflicting classes and arbitrary values, and enforces Tailwind's official class order (`pnpm lint:fix` sorts them). Class order lives in ESLint only: `prettier-plugin-tailwindcss` doesn't sort `.astro` files (tailwindlabs/prettier-plugin-tailwindcss#451).
 - **Type checking:** `pnpm check` runs `astro check`. TypeScript is pinned to 6.0 because `typescript-eslint` and `@astrojs/check` don't support 7 yet.
 - **Node:** version pinned in `.nvmrc`; package manager is pnpm.
 - **TypeScript:** strict mode.
