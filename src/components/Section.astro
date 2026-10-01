@@ -1,0 +1,14 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  heading: string;
+}
+
+const { heading } = Astro.props;
+---
+
+<section class="flex flex-col">
+  <SectionHeading text={heading} />
+  <slot />
+</section>
