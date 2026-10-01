@@ -123,7 +123,8 @@ design-reference/      # Approved prototype (read-only)
 ## 5. Deployment
 
 - **Host:** Cloudflare Workers with static assets. No adapter and no server code: `wrangler.jsonc` only points Cloudflare at `dist/`, and Cloudflare serves those files from its edge.
-- **Builds:** Workers Builds, connected to `dguzt/danielguzman.io` on GitHub. Push to `main` deploys production; other branches get preview URLs.
+- **Builds:** Workers Builds, connected to `dguzt/danielguzman.io` on GitHub. Push to `main` deploys production; other branches get a Preview at `https://<branch>-danielguzman.bluedune.workers.dev` (for example `feat-m1-tokens-layout-…`).
+- **Previews:** branch builds deploy with `npx wrangler preview` (Workers Previews, beta), which needs the `"previews": {}` block in `wrangler.jsonc`. It stays empty while the site has no bindings or vars. Previews answer unknown URLs with a plain "Not found"; only production applies `not_found_handling`.
 - **Build command:** `pnpm build`. **Deploy command:** `npx wrangler deploy`. Node comes from `.nvmrc`, pnpm from `packageManager` in `package.json`.
 - **Worker:** `danielguzman`, also served at `danielguzman.bluedune.workers.dev`. The name in `wrangler.jsonc` must match the Worker name in the dashboard.
 - **Domain:** `danielguzman.io`, bought through Cloudflare Registrar and attached as a custom domain on the Worker.
