@@ -117,7 +117,11 @@ design-reference/      # Approved prototype (read-only)
 - **Builds:** Workers Builds, connected to `dguzt/danielguzman.io` on GitHub. Push to `main` deploys production; other branches get preview URLs.
 - **Build command:** `pnpm build`. **Deploy command:** `npx wrangler deploy`. Node comes from `.nvmrc`, pnpm from `packageManager` in `package.json`.
 - **Worker:** `danielguzman`, also served at `danielguzman.bluedune.workers.dev`. The name in `wrangler.jsonc` must match the Worker name in the dashboard.
-- **Domain:** `danielguzman.io`, attached as a custom domain on the Worker.
+- **Domain:** `danielguzman.io`, bought through Cloudflare Registrar and attached as a custom domain on the Worker.
+- **Dashboard-only settings** (not in the repo, so check here before changing them):
+  - DNS: `www` is a proxied `AAAA` record to `100::`. It exists only so the redirect rule can catch `www` traffic.
+  - Rules → Redirect Rules: "Redirect from WWW to root", 301, preserving path and query string.
+  - SSL/TLS → Edge Certificates: **Always Use HTTPS** on.
 - **Analytics:** Cloudflare Web Analytics (no cookies).
 
 ---
