@@ -1,16 +1,16 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const name = 'Daniel Guzman';
+const tagline = 'I build things that teach.';
+const location = 'Lima, Peru';
+const description = `${name} is an engineer from ${location} who builds learning products with AI.`;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout title={name} description={description}>
+  <main class="grid min-h-dvh place-content-center gap-3 px-6">
+    <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">{name}</h1>
+    <p class="text-lg text-green">{tagline}</p>
+    <p class="font-mono text-sm text-muted">{location}</p>
+  </main>
+</BaseLayout>

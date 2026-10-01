@@ -28,6 +28,7 @@ pnpm dev
 | `pnpm preview`      | Serve the production build locally  |
 | `pnpm check`        | Type-check `.astro` and `.ts` files |
 | `pnpm lint`         | Run ESLint                          |
+| `pnpm lint:fix`     | Run ESLint and fix what it can      |
 | `pnpm format`       | Format everything with Prettier     |
 | `pnpm format:check` | Check formatting without writing    |
 

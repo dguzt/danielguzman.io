@@ -76,7 +76,7 @@ Phase 3: /talks (visible from ~3 entries; audience filter + role tag)
 
 - **Sans:** Geist (400, 500, 600) for headings and body.
 - **Mono:** Geist Mono (400, 500) for nav, labels, meta, section headings (`## label`).
-- Scale used in the prototype: 13, 14, 16, 17, 19, 22, 26, 32, 44, 52 px. Convert to a token scale.
+- Scale used in the prototype: 13, 14, 16, 17, 19, 22, 26, 32, 44, 52 px. As tokens: `xs` 13, `sm` 14, `base` 16, `md` 17, `lg` 19, `xl` 22, `2xl` 26, `3xl` 32, `4xl` 44, `5xl` 52 (Tailwind `text-*`).
 
 ### Layout
 
@@ -112,12 +112,13 @@ Replaces a static "in progress" label with a Claude-style reasoning loop: `✻ b
 
 ## 8. Decision log
 
-| Decision                                                 | Why                                                           |
-| -------------------------------------------------------- | ------------------------------------------------------------- |
-| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                  |
-| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story      |
-| Only show what's being built now                         | Announcing future features creates promises that can backfire |
-| Rows over cards                                          | Linear reading order; simpler responsive behavior             |
-| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four        |
-| No hero animation at launch                              | Performance; the effect becomes its own project               |
-| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise           |
+| Decision                                                 | Why                                                                   |
+| -------------------------------------------------------- | --------------------------------------------------------------------- |
+| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                          |
+| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story              |
+| Only show what's being built now                         | Announcing future features creates promises that can backfire         |
+| Rows over cards                                          | Linear reading order; simpler responsive behavior                     |
+| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four                |
+| No hero animation at launch                              | Performance; the effect becomes its own project                       |
+| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise                   |
+| Tailwind CSS 4 for styling, tokens in `@theme`           | Daniel already knows Tailwind; tokens stay the single source of truth |

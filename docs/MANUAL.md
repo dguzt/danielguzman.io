@@ -8,7 +8,7 @@ How the site is built, and how to keep it alive. This is a **living document**: 
 
 - **Framework:** Astro, static output (no server).
 - **Content:** Markdown/MDX in content collections, validated with schemas.
-- **Styling:** plain CSS with design tokens (CSS custom properties). No UI framework.
+- **Styling:** Tailwind CSS 4 through the official `@tailwindcss/vite` plugin. Design tokens live in Tailwind's `@theme`, so every token is both a CSS variable and a utility class (`bg-bg`, `text-green`, `text-sm`).
 - **JavaScript:** none by default. Add an island only when interaction truly needs it.
 - **i18n:** Astro's built-in i18n routing. English at `/`, Spanish at `/es/`.
 - **Hosting:** Cloudflare (static), with Cloudflare Web Analytics (no cookies).
@@ -25,7 +25,7 @@ src/
 ├── content.config.ts  # Collection schemas (path may differ by Astro version)
 ├── i18n/              # ui.ts (UI strings per language) + helpers (getLang, t())
 ├── lib/               # Pure functions: sorting, filtering by tag, reading time, dates
-├── styles/            # tokens.css, global.css
+├── styles/            # tokens.css (@theme), global.css (Tailwind entry + base styles)
 └── assets/            # Images processed by astro:assets
 docs/                  # DESIGN.md, MANUAL.md
 design-reference/      # Approved prototype (read-only)
@@ -36,7 +36,9 @@ design-reference/      # Approved prototype (read-only)
 - `pages/` may import from `layouts/`, `components/`, `lib/`, `i18n/`.
 - `components/` receive data through props. They **never** fetch collections themselves.
 - `lib/` has no Astro imports when possible: pure TypeScript, easy to test.
-- Styles use tokens only. A raw hex value outside `tokens.css` is a bug.
+- Styles use tokens only. A raw hex value outside `tokens.css` is a bug, and so is an arbitrary Tailwind value (`text-[#fff]`, `p-[13px]`). If the scale is missing a value, add a token.
+- `tokens.css` resets Tailwind's default colors, fonts and type sizes (`--color-*: initial`), so only the One Dark palette and the site's type scale exist as utilities.
+- `global.css` is imported once, in `BaseLayout.astro`. Pages never import it.
 
 ---
 
@@ -48,9 +50,11 @@ design-reference/      # Approved prototype (read-only)
 - **Branches:** `main` is always deployable. Work on `feat/...` branches for anything bigger than a typo.
 - **Formatting:** Prettier with `prettier-plugin-astro`, Airbnb-like options (single quotes, semicolons, trailing commas, width 100). `pnpm format` writes, `pnpm format:check` verifies.
 - **Linting:** ESLint 10 flat config: `@eslint/js` recommended, `typescript-eslint` strict + stylistic, `eslint-plugin-astro` recommended, plus a few Airbnb rules (`eqeqeq`, `curly`, `prefer-const`, `prefer-template`, `object-shorthand`, `no-var`, `no-param-reassign`). The official Airbnb config doesn't support ESLint 9+.
+- **Tailwind classes:** `eslint-plugin-better-tailwindcss` rejects unknown classes, conflicting classes and arbitrary values, and enforces Tailwind's official class order (`pnpm lint:fix` sorts them). `prettier-plugin-tailwindcss` sorts classes in the same order, but it doesn't handle `.astro` files yet (tailwindlabs/prettier-plugin-tailwindcss#451), so ESLint is the source of truth there.
 - **Type checking:** `pnpm check` runs `astro check`. TypeScript is pinned to 6.0 because `typescript-eslint` and `@astrojs/check` don't support 7 yet.
 - **Node:** version pinned in `.nvmrc`; package manager is pnpm.
 - **TypeScript:** strict mode.
+- **Imports:** use `./` only for a file in the same folder. Everything else goes through the `@/` alias, which points to `src/` (`@/styles/global.css`, `@/components/Header.astro`). Never `../`; ESLint rejects it.
 
 ---
 

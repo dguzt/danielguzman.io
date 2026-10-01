@@ -1,0 +1,30 @@
+@theme {
+  --color-*: initial;
+  --color-bg: #282c34;
+  --color-surface: #21252b;
+  --color-chip: #3e4451;
+  --color-line: #3a3f4b;
+  --color-fg: #d7dae0;
+  --color-soft: #c0c5ce;
+  --color-muted: #949aa6;
+  --color-green: #98c379;
+  --color-blue: #61afef;
+  --color-yellow: #e5c07b;
+  --color-purple: #c678dd;
+
+  --font-*: initial;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-*: initial;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.75rem;
+  --text-5xl: 3.25rem;
+}
