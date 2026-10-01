@@ -116,6 +116,7 @@ design-reference/      # Approved prototype (read-only)
 - **Host:** Cloudflare Workers with static assets. No adapter and no server code: `wrangler.jsonc` only points Cloudflare at `dist/`, and Cloudflare serves those files from its edge.
 - **Builds:** Workers Builds, connected to `dguzt/danielguzman.io` on GitHub. Push to `main` deploys production; other branches get preview URLs.
 - **Build command:** `pnpm build`. **Deploy command:** `npx wrangler deploy`. Node comes from `.nvmrc`, pnpm from `packageManager` in `package.json`.
+- **Worker:** `danielguzman`, also served at `danielguzman.bluedune.workers.dev`. The name in `wrangler.jsonc` must match the Worker name in the dashboard.
 - **Domain:** `danielguzman.io`, attached as a custom domain on the Worker.
 - **Analytics:** Cloudflare Web Analytics (no cookies).
 
