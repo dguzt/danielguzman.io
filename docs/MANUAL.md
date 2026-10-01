@@ -113,6 +113,10 @@ Slack, WhatsApp and LinkedIn show `public/og.png` (1200 × 630) when someone sha
 3. Keep it PNG or JPG and under ~300 KB (WhatsApp skips larger images). The file name stays `og.png` so its URL never changes.
 4. Apps cache previews. Test with a throwaway query (`https://danielguzman.io/?v=2`) or [opengraph.xyz](https://www.opengraph.xyz).
 
+### Update the favicon
+
+`public/favicon.svg` is the "dg" monogram in Geist Mono 700, light on the One Dark background. The letters are vector outlines, because an SVG favicon can't load web fonts. `favicon.ico` (16/32/48) and `apple-touch-icon.png` (180, square corners; iOS rounds them) are PNG renders of the same SVG made with Sharp. Replace all three together.
+
 ### Update the profile photo
 
 1. Replace the file in `src/assets/`. Keep it square, face well lit, simple background.
