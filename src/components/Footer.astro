@@ -1,0 +1,20 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import { author } from '@/lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<footer class="flex flex-wrap justify-between gap-4 border-t border-line pt-5 font-mono text-xs text-muted">
+  <p>
+    © {author.toLowerCase()} — {t('footer.made')}
+  </p>
+  <SocialLinks lang={lang} />
+</footer>

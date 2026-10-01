@@ -1,0 +1,22 @@
+---
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import { socialLinks } from '@/lib/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<ul class="flex flex-wrap gap-5" aria-label={t('social.label')}>
+  {socialLinks.map(({ label, href }) => (
+    <li>
+      <a href={href} class="text-fg hover:text-white">
+        {label}
+      </a>
+    </li>
+  ))}
+</ul>

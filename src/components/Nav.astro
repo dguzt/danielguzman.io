@@ -1,0 +1,35 @@
+---
+import type { Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import { isCurrentPath } from '@/lib/paths';
+import { isBuilt } from '@/lib/routes';
+import { navItems } from '@/lib/site';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const t = useTranslations(lang);
+const items = navItems.filter(({ href }) => isBuilt(href));
+---
+
+<nav aria-label={t('nav.label')}>
+  <ul class="flex flex-wrap gap-x-6 gap-y-2">
+    {items.map(({ key, href }) => {
+      const current = isCurrentPath(currentPath, href);
+      return (
+        <li>
+          <a
+            href={href}
+            aria-current={current ? 'page' : undefined}
+            class:list={['no-underline hover:text-white', current ? 'text-blue' : 'text-fg']}
+          >
+            {t(key)}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

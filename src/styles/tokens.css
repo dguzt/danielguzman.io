@@ -11,10 +11,7 @@
   --color-blue: #61afef;
   --color-yellow: #e5c07b;
   --color-purple: #c678dd;
-
-  --font-*: initial;
-  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --color-white: #ffffff;
 
   --text-*: initial;
   --text-xs: 0.8125rem;
@@ -27,4 +24,12 @@
   --text-3xl: 2rem;
   --text-4xl: 2.75rem;
   --text-5xl: 3.25rem;
+
+  --container-column: 51.25rem;
+}
+
+@theme inline {
+  --font-*: initial;
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
 }
