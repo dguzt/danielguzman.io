@@ -128,3 +128,4 @@ Replaces a static "in progress" label with a Claude-style reasoning loop: `✻ b
 | Language toggle and tag filter are links, not buttons    | Each language and tag has its own URL; no JavaScript needed                     |
 | StatusLoop shimmer runs on the word cycle                | The prototype's independent 1.8s shimmer got cut off mid-word                   |
 | Videos deferred                                          | The YouTube channel isn't open yet; only publish what exists                    |
+| One static link preview card (`public/og.png`)           | No new dependencies; per-post cards can come with posts in M5                   |

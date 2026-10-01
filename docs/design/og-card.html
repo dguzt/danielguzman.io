@@ -1,0 +1,107 @@
+<!doctype html>
+<!-- Source of public/og.png (1200 × 630). Regenerate with the command in docs/MANUAL.md → "Update the link preview image". -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@600&family=Geist+Mono:wght@400&display=block"
+    />
+    <style>
+      :root {
+        --bg: #282c34;
+        --line: #3a3f4b;
+        --fg: #d7dae0;
+        --muted: #949aa6;
+        --green: #98c379;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 1200px;
+        height: 630px;
+        padding: 64px 96px 56px;
+        color: var(--fg);
+      }
+
+      .hero {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        gap: 56px;
+        padding-bottom: 48px;
+      }
+
+      img {
+        width: 240px;
+        height: 240px;
+        border-radius: 999px;
+        object-fit: cover;
+        box-shadow: 0 0 0 2px var(--line);
+      }
+
+      .text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: 'Geist', sans-serif;
+        font-size: 84px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+        line-height: 1;
+      }
+
+      .tagline {
+        margin: 0;
+        font-family: 'Geist Mono', monospace;
+        font-size: 38px;
+        color: var(--green);
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 28px;
+        border-top: 2px solid var(--line);
+        font-family: 'Geist Mono', monospace;
+        font-size: 28px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="hero">
+        <img src="../../src/assets/profile.jpeg" alt="" />
+        <div class="text">
+          <h1>Daniel Guzman</h1>
+          <p class="tagline">I build things that teach.</p>
+        </div>
+      </div>
+      <div class="footer">
+        <span>~/lima, peru</span>
+        <span>danielguzman.io</span>
+      </div>
+    </div>
+  </body>
+</html>
