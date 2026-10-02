@@ -13,5 +13,5 @@ const { lang, currentPath } = Astro.props;
 
 <header class="flex flex-wrap items-center justify-between gap-4 font-mono text-sm">
   <Nav lang={lang} currentPath={currentPath} />
-  <LangToggle lang={lang} />
+  <LangToggle lang={lang} currentPath={currentPath} />
 </header>

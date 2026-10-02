@@ -1,26 +1,31 @@
 ---
-import { languages, type Lang } from '@/i18n/ui';
-import { useTranslations } from '@/i18n/utils';
+import type { Lang } from '@/i18n/ui';
+import { langs, localizePath, useTranslations } from '@/i18n/utils';
 import { isBuilt } from '@/lib/routes';
 
 interface Props {
   lang: Lang;
+  currentPath: string;
 }
 
-const { lang } = Astro.props;
+const { lang, currentPath } = Astro.props;
 const t = useTranslations(lang);
-const homeByLang: Record<Lang, string> = { en: '/', es: '/es/' };
-const options = (Object.keys(languages) as Lang[]).filter((option) => isBuilt(homeByLang[option]));
+const options = langs
+  .filter((option) => isBuilt(localizePath('/', option)))
+  .map((option) => {
+    const samePage = localizePath(currentPath, option);
+    return { option, href: isBuilt(samePage) ? samePage : localizePath('/', option) };
+  });
 ---
 
 {options.length > 1 && (
   <ul class="flex gap-1" aria-label={t('lang.label')}>
-    {options.map((option) => {
+    {options.map(({ option, href }) => {
       const current = option === lang;
       return (
         <li>
           <a
-            href={homeByLang[option]}
+            href={href}
             hreflang={option}
             lang={option}
             aria-current={current ? 'true' : undefined}

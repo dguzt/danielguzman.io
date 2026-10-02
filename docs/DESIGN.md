@@ -112,21 +112,23 @@ Replaces a static "in progress" label with a Claude-style reasoning loop: `✻ b
 
 ## 8. Decision log
 
-| Decision                                                 | Why                                                                             |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                                    |
-| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story                        |
-| Only show what's being built now                         | Announcing future features creates promises that can backfire                   |
-| Rows over cards                                          | Linear reading order; simpler responsive behavior                               |
-| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four                          |
-| No hero animation at launch                              | Performance; the effect becomes its own project                                 |
-| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise                             |
-| Tailwind CSS 4 for styling, tokens in `@theme`           | Daniel already knows Tailwind; tokens stay the single source of truth           |
-| Fonts through Astro's Fonts API (Fontsource provider)    | Self-hosted at build time, metric-matched fallbacks, no third-party requests    |
-| `--color-white` token for link hover                     | The prototype's hover used a raw `#FFFFFF`                                      |
-| Off-scale prototype values snapped to the scale          | 48→52 (MakerLab title), 18→17 (post body), 15→14 (About links), `#7F848E`→muted |
-| Language toggle and tag filter are links, not buttons    | Each language and tag has its own URL; no JavaScript needed                     |
-| StatusLoop shimmer runs on the word cycle                | The prototype's independent 1.8s shimmer got cut off mid-word                   |
-| Videos deferred                                          | The YouTube channel isn't open yet; only publish what exists                    |
-| One static link preview card (`public/og.png`)           | No new dependencies; per-post cards can come with posts in M5                   |
-| "dg" monogram favicon                                    | Personal and legible at 16px; replaces Astro's default icon                     |
+| Decision                                                 | Why                                                                                 |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Audience: edtech founders + LDT, not recruiters          | Education is the destination; AI is the tool                                        |
+| Admitidos first; CoCapital and Tributo as "other builds" | Show engineering range without diluting the edtech story                            |
+| Only show what's being built now                         | Announcing future features creates promises that can backfire                       |
+| Rows over cards                                          | Linear reading order; simpler responsive behavior                                   |
+| One Dark only, no light mode                             | Clean, readable dark theme chosen after comparing four                              |
+| No hero animation at launch                              | Performance; the effect becomes its own project                                     |
+| Tags as static pages                                     | Zero JS, better SEO, a good Astro learning exercise                                 |
+| Tailwind CSS 4 for styling, tokens in `@theme`           | Daniel already knows Tailwind; tokens stay the single source of truth               |
+| Fonts through Astro's Fonts API (Fontsource provider)    | Self-hosted at build time, metric-matched fallbacks, no third-party requests        |
+| `--color-white` token for link hover                     | The prototype's hover used a raw `#FFFFFF`                                          |
+| Off-scale prototype values snapped to the scale          | 48→52 (MakerLab title), 18→17 (post body), 15→14 (About links), `#7F848E`→muted     |
+| Language toggle and tag filter are links, not buttons    | Each language and tag has its own URL; no JavaScript needed                         |
+| StatusLoop shimmer runs on the word cycle                | The prototype's independent 1.8s shimmer got cut off mid-word                       |
+| Videos deferred                                          | The YouTube channel isn't open yet; only publish what exists                        |
+| One static link preview card (`public/og.png`)           | No new dependencies; per-post cards can come with posts in M5                       |
+| "dg" monogram favicon                                    | Personal and legible at 16px; replaces Astro's default icon                         |
+| Built-in i18n routing, one view per page                 | Astro's documented layout (`pages/es/`); views keep each page's markup in one place |
+| Bilingual root 404                                       | Astro only outputs the root 404 as a real 404 page                                  |

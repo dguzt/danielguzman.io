@@ -10,7 +10,7 @@ How the site is built, and how to keep it alive. This is a **living document**: 
 - **Content:** Markdown/MDX in content collections, validated with schemas.
 - **Styling:** Tailwind CSS 4 through the official `@tailwindcss/vite` plugin. Design tokens live in Tailwind's `@theme`, so every token is both a CSS variable and a utility class (`bg-bg`, `text-green`, `text-sm`).
 - **JavaScript:** none by default. Add an island only when interaction truly needs it.
-- **i18n:** Astro's built-in i18n routing. English at `/`, Spanish at `/es/`.
+- **i18n:** Astro's built-in i18n routing (`i18n` in `astro.config.mjs`, `prefixDefaultLocale: false`). English at `/`, Spanish at `/es/`. Layouts and views read the language from `Astro.currentLocale` through `getLang()`; links get their prefix from `localizePath()` (`i18n/utils.ts`, built on `astro:i18n`'s `getRelativeLocaleUrl`).
 - **Hosting:** Cloudflare (static), with Cloudflare Web Analytics (no cookies).
 - **Fonts:** Geist and Geist Mono through Astro's Fonts API (`fonts` in `astro.config.mjs`, Fontsource provider). Astro downloads them at build time and serves them from the site, latin subset and upright styles only. `BaseLayout` renders `<Font>` for both; only Geist is preloaded. `tokens.css` maps `--font-sans` / `--font-mono` to the generated variables in `@theme inline`.
 - **Images:** `astro:assets` with Sharp (dev dependency) converts and resizes at build time.
@@ -23,11 +23,12 @@ Confirmed for M1 and the home page. `content/` and the Spanish routes arrive in 
 src/
 ├── components/        # Small, single-purpose UI pieces (Header, Footer, Row, StatusLoop…), flat
 ├── layouts/           # Page shells: BaseLayout (column, Header, Footer around a <slot />)
-├── pages/             # Routes only: compose layouts + components, fetch via lib/
-│   └── es/            # Spanish routes (or dynamic [lang] routing — decide in M2)
+├── pages/             # Routes only: one thin file per language that renders a view
+│   └── es/            # Spanish routes, same file names as the English ones
+├── views/             # One per page: the page body, shared by every language (HomeView)
 ├── content/           # Markdown/MDX entries: projects/, posts/, videos/, talks/
 ├── content.config.ts  # Collection schemas (path may differ by Astro version)
-├── i18n/              # ui.ts (UI strings, en + es) + utils.ts (useTranslations)
+├── i18n/              # ui.ts (UI strings, en + es) + utils.ts (getLang, useTranslations, localizePath)
 ├── lib/               # site.ts (nav, social), routes.ts (isBuilt), paths.ts, home-content.ts (static until collections)
 ├── styles/            # tokens.css (@theme), global.css (Tailwind entry + base styles)
 └── assets/            # Images processed by astro:assets
@@ -37,7 +38,7 @@ design-reference/      # Approved prototype (read-only)
 
 ### Dependency rules
 
-- `pages/` may import from `layouts/`, `components/`, `lib/`, `i18n/`.
+- `pages/` only import a view. `views/` may import from `layouts/`, `components/`, `lib/`, `i18n/`.
 - `components/` receive data through props. They **never** fetch collections themselves.
 - `lib/` has no Astro imports when possible: pure TypeScript, easy to test.
 - Styles use tokens only. A raw hex value outside `tokens.css` is a bug, and so is an arbitrary Tailwind value (`text-[#fff]`, `p-[13px]`). If the scale is missing a value, add a token.
@@ -79,10 +80,12 @@ design-reference/      # Approved prototype (read-only)
 3. **Rule:** a project only gets a link when its README or demo is presentable.
 4. Never describe features that don't exist yet.
 
-### Add a page to the nav
+### Add a page (both languages)
 
-1. Create the page file in `src/pages/` (for example `about.astro`).
-2. That's it: `Nav` only shows items from `lib/site.ts` whose page exists (`lib/routes.ts` → `isBuilt`). The EN/ES toggle works the same way and appears once `/es/` exists. Rows and links on the home page use `hrefIfBuilt`, so they become links when their page ships.
+1. Write the body once as a view: `src/views/AboutView.astro`. Get the language with `getLang(Astro.currentLocale)` and its text from `useTranslations(lang)` or a per-language content object.
+2. Create two thin page files that only render the view: `src/pages/about.astro` and `src/pages/es/about.astro`.
+3. Build links with `localizePath('/about', lang)`. Never hardcode `/es/`.
+4. That's it for the nav: `Nav` only shows items from `lib/site.ts` whose page exists (`lib/routes.ts` → `isBuilt`). The EN/ES toggle links to the same page in the other language when it exists, and to that language's home otherwise. `Seo` adds `hreflang` alternates only for pages built in both languages. Rows and links on the home page use `hrefIfBuilt`, so they become links when their page ships.
 
 ### Change Admitidos' status loop
 
@@ -189,4 +192,5 @@ Add entries here as you hit problems: symptom → cause → fix.
 - **Fonts API downloads italic files you don't use** → it fetches every style by default → set `styles: ['normal']` per family.
 - **ESLint `no-unknown-classes` on custom class names in a component `<style>`** → the Tailwind plugin only knows utilities → select with data attributes (`[data-word]`) instead of class names.
 - **An animation looks wrong right after editing its CSS** → hot reload keeps running animations instead of restarting them → hard reload (Cmd+Shift+R) before judging timing.
+- **A Spanish `es/404.astro` doesn't work as a 404** → Astro only treats the root `404` specially and outputs `es/404/index.html`, which Cloudflare never serves for missing pages → the root 404 is bilingual instead.
 - **Unknown URL shows a blank Cloudflare 404 in production** → Workers static assets default to no 404 page → `"not_found_handling": "404-page"` in `wrangler.jsonc` (set in M1).
