@@ -1,12 +1,16 @@
 ---
-import { useTranslations } from '@/i18n/utils';
+import { defaultLang } from '@/i18n/ui';
+import { langs, localizePath, useTranslations } from '@/i18n/utils';
+import { isBuilt } from '@/lib/routes';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const lang = 'en';
-const t = useTranslations(lang);
+const t = useTranslations(defaultLang);
+const others = langs
+  .filter((lang) => lang !== defaultLang && isBuilt(localizePath('/', lang)))
+  .map((lang) => ({ lang, home: localizePath('/', lang), t: useTranslations(lang) }));
 ---
 
-<BaseLayout title={t('site.notFoundTitle')} description={t('notFound.body')} lang={lang}>
+<BaseLayout title={t('site.notFoundTitle')} description={t('notFound.body')}>
   <section class="flex flex-col gap-5.5">
     <p class="font-mono text-sm text-muted">{t('notFound.code')}</p>
     <h1 class="text-4xl font-semibold tracking-tight">{t('notFound.title')}</h1>
@@ -15,4 +19,14 @@ const t = useTranslations(lang);
       {t('notFound.home')}
     </a>
   </section>
+  {others.map(({ lang, home, t: tr }) => (
+    <section lang={lang} class="flex flex-col gap-3 border-t border-line pt-6">
+      <p class="text-md leading-relaxed text-soft">
+        {tr('notFound.title')}. {tr('notFound.body')}
+      </p>
+      <a href={home} class="font-mono text-sm text-muted no-underline hover:text-white">
+        {tr('notFound.home')}
+      </a>
+    </section>
+  ))}
 </BaseLayout>

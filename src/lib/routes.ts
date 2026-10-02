@@ -8,7 +8,9 @@ function toRoute(file: string) {
   return route || '/';
 }
 
-const builtRoutes = new Set(pageFiles.map(toRoute));
+const notFoundRoute = '/404';
+
+const builtRoutes = new Set(pageFiles.map(toRoute).filter((route) => route !== notFoundRoute));
 
 export function isBuilt(href: string) {
   const path = href.length > 1 ? href.replace(/\/+$/, '') : href;

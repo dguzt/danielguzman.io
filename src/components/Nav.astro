@@ -1,6 +1,6 @@
 ---
 import type { Lang } from '@/i18n/ui';
-import { useTranslations } from '@/i18n/utils';
+import { localizePath, stripLang, useTranslations } from '@/i18n/utils';
 import { isCurrentPath } from '@/lib/paths';
 import { isBuilt } from '@/lib/routes';
 import { navItems } from '@/lib/site';
@@ -12,13 +12,15 @@ interface Props {
 
 const { lang, currentPath } = Astro.props;
 const t = useTranslations(lang);
-const items = navItems.filter(({ href }) => isBuilt(href));
+const items = navItems
+  .map(({ key, href }) => ({ key, href: localizePath(href, lang), base: href }))
+  .filter(({ href }) => isBuilt(href));
 ---
 
 <nav aria-label={t('nav.label')}>
   <ul class="flex flex-wrap gap-x-6 gap-y-2">
-    {items.map(({ key, href }) => {
-      const current = isCurrentPath(currentPath, href);
+    {items.map(({ key, href, base }) => {
+      const current = isCurrentPath(stripLang(currentPath), base);
       return (
         <li>
           <a
